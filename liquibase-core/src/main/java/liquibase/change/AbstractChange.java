@@ -109,7 +109,7 @@ public abstract class AbstractChange implements Change {
 
         try {
             String displayName = parameterName.replaceAll("([A-Z])", " $1");
-            displayName = displayName.substring(0, 1).toUpperCase() + displayName.substring(1);
+            displayName = displayName.substring(0, 1) + displayName.substring(1);
 
             PropertyDescriptor property = null;
             for (PropertyDescriptor prop : PropertyUtils.getInstance().getDescriptors(getClass())) {

@@ -243,7 +243,7 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
 
         Object defaultValue = readDefaultValue(columnMetadataResultSet, column, database);
         if (defaultValue != null && defaultValue instanceof DatabaseFunction && ((DatabaseFunction) defaultValue).getValue().matches("\\w+")) {
-            defaultValue = new DatabaseFunction(((DatabaseFunction) defaultValue).getValue().toUpperCase());
+            defaultValue = new DatabaseFunction(((DatabaseFunction) defaultValue).getValue());
         }
         column.setDefaultValue(defaultValue);
         column.setDefaultValueConstraintName(columnMetadataResultSet.getString("COLUMN_DEF_NAME"));

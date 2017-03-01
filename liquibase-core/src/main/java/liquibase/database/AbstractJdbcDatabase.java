@@ -719,7 +719,7 @@ public abstract class AbstractJdbcDatabase implements Database {
 
     @Override
     public boolean isReservedWord(final String string) {
-        return reservedWords.contains(string.toUpperCase());
+        return reservedWords.contains(string);
     }
 
     /*
@@ -1095,7 +1095,7 @@ public abstract class AbstractJdbcDatabase implements Database {
 
     @Override
     public String generatePrimaryKeyName(final String tableName) {
-        return "PK_" + tableName.toUpperCase();
+        return "PK_" + tableName;
     }
 
     @Override

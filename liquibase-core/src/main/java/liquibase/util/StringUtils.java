@@ -237,7 +237,7 @@ public class StringUtils {
     }
 
     public static String upperCaseFirst(String string) {
-        return string.substring(0, 1).toUpperCase()+string.substring(1);
+        return string.substring(0, 1)+string.substring(1);
     }
 
     public static boolean hasUpperCase(String string) {
