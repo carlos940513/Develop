@@ -78,9 +78,9 @@ public class StringUtils {
             return piece.equals(";") || ((piece.equalsIgnoreCase("go") || piece.equals("/")) && (previousPiece == null || previousPiece.endsWith("\n")));
         } else {
             if (endDelimiter.length() == 1) {
-                return piece.toLowerCase().equalsIgnoreCase(endDelimiter.toLowerCase());
+                return piece.equalsIgnoreCase(endDelimiter);
             } else {
-                return piece.toLowerCase().matches(endDelimiter.toLowerCase()) || (previousPiece+piece).toLowerCase().matches("[.\n\r]*"+endDelimiter.toLowerCase());
+                return piece.matches(endDelimiter) || (previousPiece+piece).matches("[.\n\r]*"+endDelimiter);
             }
         }
     }
@@ -233,7 +233,7 @@ public class StringUtils {
     }
 
     public static String lowerCaseFirst(String string) {
-        return string.substring(0, 1).toLowerCase()+string.substring(1);
+        return string.substring(0, 1)+string.substring(1);
     }
 
     public static String upperCaseFirst(String string) {

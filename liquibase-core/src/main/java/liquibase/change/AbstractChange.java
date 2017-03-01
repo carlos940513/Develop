@@ -702,7 +702,7 @@ public abstract class AbstractChange implements Change {
 
         SortedSet<String> names = new TreeSet<String>();
         for (Map.Entry<String, ChangeParameterMetaData> entry : metaData.getParameters().entrySet()) {
-            String lowerCaseKey = entry.getKey().toLowerCase();
+            String lowerCaseKey = entry.getKey();
             if (lowerCaseKey.endsWith("name") && !lowerCaseKey.contains("schema") && !lowerCaseKey.contains("catalog")) {
                 Object currentValue = entry.getValue().getCurrentValue(this);
                 if (currentValue != null) {

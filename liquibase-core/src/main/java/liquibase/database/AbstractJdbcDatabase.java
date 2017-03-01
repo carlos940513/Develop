@@ -282,9 +282,9 @@ public abstract class AbstractJdbcDatabase implements Database {
                 quotingEndCharacter))) {
             return objectName;
         } else if (Boolean.TRUE.equals(unquotedObjectsAreUppercased)) {
-            return objectName.toUpperCase();
+            return objectName;
         } else {
-            return objectName.toLowerCase();
+            return objectName;
         }
     }
 
@@ -1412,7 +1412,7 @@ public abstract class AbstractJdbcDatabase implements Database {
 
     @Override
     public boolean dataTypeIsNotModifiable(final String typeName) {
-        return unmodifiableDataTypes.contains(typeName.toLowerCase());
+        return unmodifiableDataTypes.contains(typeName);
     }
 
     @Override
@@ -1430,7 +1430,7 @@ public abstract class AbstractJdbcDatabase implements Database {
         if (databaseFunction.getValue() == null) {
             return null;
         }
-        if (isCurrentTimeFunction(databaseFunction.getValue().toLowerCase())) {
+        if (isCurrentTimeFunction(databaseFunction.getValue())) {
             return getCurrentDateTimeFunction();
         } else if (databaseFunction instanceof SequenceNextValueFunction) {
             if (sequenceNextValueFunction == null) {

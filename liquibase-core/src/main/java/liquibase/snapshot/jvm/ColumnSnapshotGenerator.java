@@ -175,7 +175,7 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
         if (database.supportsAutoIncrement()) {
             if (table instanceof Table) {
                 if (database instanceof OracleDatabase) {
-                    String data_default = StringUtils.trimToEmpty((String) columnMetadataResultSet.get("DATA_DEFAULT")).toLowerCase();
+                    String data_default = StringUtils.trimToEmpty((String) columnMetadataResultSet.get("DATA_DEFAULT"));
                     if (data_default.contains("iseq$$") && data_default.endsWith("nextval")) {
                         column.setAutoIncrementInformation(new Column.AutoIncrementInformation());
                     }
@@ -426,7 +426,7 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
 
                 Object defaultValue = columnMetadataResultSet.get("COLUMN_DEF");
                 if (defaultValue != null && defaultValue instanceof String) {
-                    String lowerCaseDefaultValue = ((String) defaultValue).toLowerCase();
+                    String lowerCaseDefaultValue = ((String) defaultValue);
                     if (lowerCaseDefaultValue.contains("iseq$$") && lowerCaseDefaultValue.endsWith(".nextval")) {
                         columnMetadataResultSet.set("COLUMN_DEF", null);
                     }
