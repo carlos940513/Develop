@@ -155,7 +155,7 @@ public class UniqueConstraint extends AbstractDatabaseObject {
 		UniqueConstraint that = (UniqueConstraint) o;
 		boolean result = false;
 		result = !(getColumnNames() != null ? !getColumnNames()
-				.equalsIgnoreCase(that.getColumnNames()) : that
+				.equals(that.getColumnNames()) : that
 				.getColumnNames() != null)
 				&& isDeferrable() == that.isDeferrable()
 				&& isInitiallyDeferred() == that.isInitiallyDeferred()

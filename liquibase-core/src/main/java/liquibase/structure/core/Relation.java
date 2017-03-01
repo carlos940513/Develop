@@ -64,7 +64,7 @@ public abstract class Relation extends AbstractDatabaseObject {
      */
     public Column getColumn(String columnName) {
         for (Column column : getColumns()) {
-            if (column.getName().equalsIgnoreCase(columnName)) {
+            if (column.getName().equals(columnName)) {
                 return column;
             }
         }

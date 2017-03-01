@@ -444,7 +444,7 @@ public class JdbcDatabaseSnapshot extends DatabaseSnapshot {
 
                 @Override
                 boolean shouldBulkSelect(String schemaKey, ResultSetCache resultSetCache) {
-                    if (tableName.equalsIgnoreCase(database.getDatabaseChangeLogTableName()) || tableName.equalsIgnoreCase(database.getDatabaseChangeLogLockTableName())) {
+                    if (tableName.equals(database.getDatabaseChangeLogTableName()) || tableName.equals(database.getDatabaseChangeLogLockTableName())) {
                         return false;
                     }
 

@@ -241,7 +241,7 @@ public class Column extends AbstractDatabaseObject {
 
             Column column = (Column) o;
 
-            return toString().equalsIgnoreCase(column.toString());
+            return toString().equals(column.toString());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

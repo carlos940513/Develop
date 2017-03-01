@@ -196,12 +196,12 @@ public class ForeignKey extends AbstractDatabaseObject{
         ForeignKey that = (ForeignKey) o;
 
         if (this.getSchema() != null && that.getSchema() != null) {
-            return StringUtils.trimToEmpty(this.getSchema().getName()).equalsIgnoreCase(StringUtils.trimToEmpty(that.getSchema().getName()));
+            return StringUtils.trimToEmpty(this.getSchema().getName()).equals(StringUtils.trimToEmpty(that.getSchema().getName()));
         }
 
 
         if (getForeignKeyColumns() == null) {
-            return this.getName().equalsIgnoreCase(that.getName());
+            return this.getName().equals(that.getName());
         }
 
         StringUtils.StringUtilsFormatter formatter = new StringUtils.StringUtilsFormatter<Column>() {
@@ -211,9 +211,9 @@ public class ForeignKey extends AbstractDatabaseObject{
             }
         };
 
-        return (StringUtils.join(getForeignKeyColumns(), ",", formatter).equalsIgnoreCase(StringUtils.join(that.getForeignKeyColumns(), ",", formatter))
+        return (StringUtils.join(getForeignKeyColumns(), ",", formatter).equals(StringUtils.join(that.getForeignKeyColumns(), ",", formatter))
                 && (getForeignKeyTable() != null && that.getForeignKeyTable() != null && getForeignKeyTable().equals(that.getForeignKeyTable()))
-                && (StringUtils.join(getPrimaryKeyColumns(), ",", formatter).equalsIgnoreCase(StringUtils.join(that.getPrimaryKeyColumns(), ",", formatter)))
+                && (StringUtils.join(getPrimaryKeyColumns(), ",", formatter).equals(StringUtils.join(that.getPrimaryKeyColumns(), ",", formatter)))
                 && (getPrimaryKeyTable() != null && that.getPrimaryKeyTable() != null && getPrimaryKeyTable().equals(that.getPrimaryKeyTable())));
     }
 

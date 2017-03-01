@@ -260,7 +260,7 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
 
             DataType type = new DataType(dataType);
             type.setDataTypeId(columnMetadataResultSet.getInt("DATA_TYPE"));
-            if (dataType.equalsIgnoreCase("NUMBER")) {
+            if (dataType.equals("NUMBER")) {
                 type.setColumnSize(columnMetadataResultSet.getInt("DATA_PRECISION"));
 //                if (type.getColumnSize() == null) {
 //                    type.setColumnSize(38);
@@ -273,9 +273,9 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
             } else {
                 type.setColumnSize(columnMetadataResultSet.getInt("DATA_LENGTH"));
 
-                if (dataType.equalsIgnoreCase("NCLOB") || dataType.equalsIgnoreCase("BLOB") || dataType.equalsIgnoreCase("CLOB")) {
+                if (dataType.equals("NCLOB") || dataType.equals("BLOB") || dataType.equals("CLOB")) {
                     type.setColumnSize(null);
-                } else if (dataType.equalsIgnoreCase("NVARCHAR") || dataType.equalsIgnoreCase("NCHAR")) {
+                } else if (dataType.equals("NVARCHAR") || dataType.equals("NCHAR")) {
                     type.setColumnSize(columnMetadataResultSet.getInt("CHAR_LENGTH"));
                     type.setColumnSizeUnit(DataType.ColumnSizeUnit.CHAR);
                 } else {
@@ -298,17 +298,17 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
         String columnTypeName = (String) columnMetadataResultSet.get("TYPE_NAME");
 
         if (database instanceof MSSQLDatabase) {
-            if (columnTypeName.equalsIgnoreCase("numeric() identity")) {
+            if (columnTypeName.equals("numeric() identity")) {
                 columnTypeName = "numeric";
-            } else if (columnTypeName.equalsIgnoreCase("decimal() identity")) {
+            } else if (columnTypeName.equals("decimal() identity")) {
                 columnTypeName = "decimal";
-            } else if (columnTypeName.equalsIgnoreCase("xml")) {
+            } else if (columnTypeName.equals("xml")) {
                 columnMetadataResultSet.set("COLUMN_SIZE", null);
                 columnMetadataResultSet.set("DECIMAL_DIGITS", null);
-            } else if (columnTypeName.equalsIgnoreCase("datetimeoffset")) {
+            } else if (columnTypeName.equals("datetimeoffset")) {
                 columnMetadataResultSet.set("COLUMN_SIZE", columnMetadataResultSet.getInt("DECIMAL_DIGITS"));
                 columnMetadataResultSet.set("DECIMAL_DIGITS", null);
-            } else if (columnTypeName.equalsIgnoreCase("time")) {
+            } else if (columnTypeName.equals("time")) {
                 columnMetadataResultSet.set("COLUMN_SIZE", columnMetadataResultSet.getInt("DECIMAL_DIGITS"));
                 columnMetadataResultSet.set("DECIMAL_DIGITS", null);
             }
@@ -324,10 +324,10 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
             }
         }
 
-        if (database instanceof MySQLDatabase && (columnTypeName.equalsIgnoreCase("ENUM") || columnTypeName.equalsIgnoreCase("SET"))) {
+        if (database instanceof MySQLDatabase && (columnTypeName.equals("ENUM") || columnTypeName.equals("SET"))) {
             try {
                 String boilerLength;
-                if (columnTypeName.equalsIgnoreCase("ENUM"))
+                if (columnTypeName.equals("ENUM"))
                     boilerLength = "7";
                 else // SET
                     boilerLength = "6";
@@ -366,12 +366,12 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
 
         if (database instanceof DB2Database) {
             String typeName = columnMetadataResultSet.getString("TYPE_NAME");
-            if (typeName.equalsIgnoreCase("DBCLOB") || typeName.equalsIgnoreCase("GRAPHIC") || typeName.equalsIgnoreCase("VARGRAPHIC")) {
+            if (typeName.equals("DBCLOB") || typeName.equals("GRAPHIC") || typeName.equals("VARGRAPHIC")) {
                 if (columnSize != null) {
                     columnSize = columnSize / 2; //Stored as double length chars
                 }
             }
-            if (columnTypeName.equalsIgnoreCase("TIMESTAMP") && decimalDigits == null) { //actually a date
+            if (columnTypeName.equals("TIMESTAMP") && decimalDigits == null) { //actually a date
                 columnTypeName = "DATE";
                 dataType = Types.DATE;
             }
@@ -408,12 +408,12 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
             if (columnMetadataResultSet.get("COLUMN_DEF") == null) {
                 columnMetadataResultSet.set("COLUMN_DEF", columnMetadataResultSet.get("DATA_DEFAULT"));
 
-                if (columnMetadataResultSet.get("COLUMN_DEF") != null && ((String) columnMetadataResultSet.get("COLUMN_DEF")).equalsIgnoreCase("NULL")) {
+                if (columnMetadataResultSet.get("COLUMN_DEF") != null && ((String) columnMetadataResultSet.get("COLUMN_DEF")).equals("NULL")) {
                     columnMetadataResultSet.set("COLUMN_DEF", null);
                 }
 
                 Object columnDef = columnMetadataResultSet.get("COLUMN_DEF");
-                if (columnInfo.getType().getTypeName().equalsIgnoreCase("CHAR") && columnDef instanceof String && !((String) columnDef).startsWith("'") && !((String) columnDef).endsWith("'")) {
+                if (columnInfo.getType().getTypeName().equals("CHAR") && columnDef instanceof String && !((String) columnDef).startsWith("'") && !((String) columnDef).endsWith("'")) {
                     return new DatabaseFunction((String) columnDef);
                 }
 
@@ -454,7 +454,7 @@ public class ColumnSnapshotGenerator extends JdbcSnapshotGenerator {
         }
 
         if (database instanceof DB2Database) {
-            if (columnMetadataResultSet.get("COLUMN_DEF") != null && ((String) columnMetadataResultSet.get("COLUMN_DEF")).equalsIgnoreCase("NULL")) {
+            if (columnMetadataResultSet.get("COLUMN_DEF") != null && ((String) columnMetadataResultSet.get("COLUMN_DEF")).equals("NULL")) {
                 columnMetadataResultSet.set("COLUMN_DEF", null);
             }
         }
